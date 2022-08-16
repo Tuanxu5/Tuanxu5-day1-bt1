@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài tập 1</title>
+  </head>
+  <body>
+    <script>
+      function isEqual(a, b) {
+        function isObject(obj) {
+          return obj != null && typeof obj === "object";
+        }
+        const x = Object.keys(a);
+        const y = Object.keys(b);
+        if (x.length !== y.length) {
+          return false;
+        }
+        for (const key of x) {
+          const value1 = a[key];
+          const value2 = b[key];
+          const areObject = isObject(value1) && isObject(value2);
+          if (areObject && !isEqual(value1, value2)) {
+            return false;
+          }
+          if (!areObject && value1 !== value2) {
+            return false;
+          }
+        }
+        return true;
+      }
+      console.log(isEqual(1, 1));
+      console.log(isEqual("1", 1));
+      console.log(isEqual([1, 2, 3], [1, 2, 3]));
+      console.log(isEqual([3, 2, 1], [1, 2, 3]));
+      console.log(isEqual([1], 1));
+      console.log(isEqual({ x: 1 }, 1));
+      console.log(isEqual({ x: 1 }, { x: 1 }));
+      console.log(isEqual({ x: 1, y: 2 }, { y: 2, x: 1 }));
+      console.log(isEqual([{ x: 1 }], [{ x: 1 }]));
+      console.log(isEqual({ x: [1] }, { x: [1] }));
+      console.log(isEqual({ x: 2, y: 1 }, { y: 2, x: 1 }));
+    </script>
+  </body>
+</html>
